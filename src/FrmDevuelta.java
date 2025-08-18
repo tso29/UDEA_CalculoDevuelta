@@ -54,20 +54,20 @@ public class FrmDevuelta extends JFrame {
         getContentPane().add(txtExistencia);
 
         // eventos para la lectura de las existencias
-        cmbDenominacion.addActionListener(new ActionListener(){
+        cmbDenominacion.addActionListener(new ActionListener() {
             
             @Override
             public void actionPerformed(ActionEvent e) {
-                consultarActualExistencias();
+                consultarActualExistencia();
             }
         });
 
-        btnActualizarExistencia.addActionListener(new ActionListener(){
+        btnActualizarExistencia.addActionListener(new ActionListener() {
 
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    actualizarExistencia();
-                }
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actualizarExistencia();
+            }
 
         });
 
@@ -93,7 +93,7 @@ public class FrmDevuelta extends JFrame {
 
     }
 
-    private void consultarActualExistencias() {
+    private void consultarActualExistencia() {
         int existencia = existencias[cmbDenominacion.getSelectedIndex()];
         txtExistencia.setText(String.valueOf(existencia));
     }
