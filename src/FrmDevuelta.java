@@ -7,14 +7,19 @@ import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JScrollPane;
 
 public class FrmDevuelta extends JFrame {
 
     // variables globales o de clase
     private int[] denominaciones = new int[] {100000, 50000, 20000, 10000, 5000, 2000, 1000, 500, 200, 100, 50};
     private int[] existencias = new int[denominaciones.length];
+    private String[] encabezados = new String[] {"Cantidad", "Presentación", "Denominación"};
     private JComboBox cmbDenominacion;
     private JTextField txtExistencia;
+    private JTextField txtDevuelta;
 
     // metodo constructor
     public FrmDevuelta() {
@@ -41,7 +46,7 @@ public class FrmDevuelta extends JFrame {
         cmbDenominacion.setModel(new DefaultComboBoxModel(strDenominaciones));
     
         JButton btnActualizarExistencia = new JButton("Actualizar Existencia:");
-        btnActualizarExistencia.setBounds(10, 40, 190, 25);
+        btnActualizarExistencia.setBounds(10, 40, 180, 25);
         getContentPane().add(btnActualizarExistencia);
 
         txtExistencia = new JTextField();
@@ -56,6 +61,36 @@ public class FrmDevuelta extends JFrame {
                 consultarActualExistencias();
             }
         });
+
+        btnActualizarExistencia.addActionListener(new ActionListener(){
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    actualizarExistencia();
+                }
+
+        });
+
+        JLabel lblDevuelta = new JLabel("Valor de Devolver:");
+        lblDevuelta.setBounds(10, 70, 150, 25);
+        getContentPane().add(lblDevuelta);
+
+        txtDevuelta = new JTextField();
+        txtDevuelta.setBounds(170, 70, 100, 25);
+        getContentPane().add(txtDevuelta);
+
+        JButton btnDevuelta = new JButton("Calcular Devuelta:");
+        btnDevuelta.setBounds(280, 70, 150, 25);
+        getContentPane().add(btnDevuelta);
+
+        JTable tblDevuelta = new JTable();
+        JScrollPane spDevuelta = new JScrollPane(tblDevuelta);
+        spDevuelta.setBounds(10, 100, 480, 250);
+        getContentPane().add(spDevuelta);
+
+        DefaultTableModel dtmDevuelta = new DefaultTableModel(null, encabezados);
+        tblDevuelta.setModel(dtmDevuelta);
+
     }
 
     private void consultarActualExistencias() {
